@@ -46,10 +46,6 @@ impl<B: Backend> PrecisionMetric<B> {
             AverageMethod::Micro => {
                 self.avg_method = AverageMethod::Micro;
             }
-            // TODO: fill other calculation methods
-            _ => {
-                unimplemented!("You provided an unsupported average method; please refer to the official docs for the supported options.");
-            }
         }
         self
     }
@@ -75,8 +71,7 @@ impl<B: Backend> Metric for PrecisionMetric<B> {
         let precision: f64 = match self.avg_method {
             AverageMethod::Micro => {
                 calc_micro_precision(&outputs, &targets, batch_size, &_n_classes)
-            }
-            // TODO: fill other calculation methods
+            } // TODO: fill other calculation methods
         };
 
         self.state.update(
